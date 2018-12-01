@@ -1,0 +1,6 @@
+authors = ["Ellis Valentiner <ellisvalentiner@gmail.com>"]
+name = "AdventOfCode2018"
+uuid = "bbb6c282-f57c-11e8-141e-b7d50cfd1739"
+version = "0.1.0"
+
+[deps]

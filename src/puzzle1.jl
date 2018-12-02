@@ -1,23 +1,25 @@
 
 function puzzle1(datadir::String=joinpath(@__DIR__, "data"))
     instructions = readlines(normpath(joinpath(datadir, "1.txt")))
-    changes = Meta.parse.(instructions)
+    changes = parse.(Int, instructions)
     x = cumsum(changes)
     partone = last(x)
-    frequencies = [0]
+    frequency = 0
+    frequencies = Dict(frequency => 1)
     found = false
-    parttwo = 0
     while !found
         for i in changes
-            val = last(frequencies) + i
-            if val in frequencies
-                parttwo = val
+            frequency += i
+            if frequency in keys(frequencies)
                 found = true
+                frequencies[frequency] += 1
                 break
+            else
+                frequencies[frequency] = 1
             end
-            append!(frequencies, val)
         end
     end
+    parttwo = findmax(frequencies)[2]
     return Dict("Part One" => partone, "Part Two" => parttwo)
 end
 

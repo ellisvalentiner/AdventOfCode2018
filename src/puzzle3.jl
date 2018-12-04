@@ -1,5 +1,5 @@
 
-function parse_input(line::String)
+function parse_input3(line::String)
     offset = match(r"\d+,\d+", line).match
     left, top = parse.(Int, split(string(offset), ','))
     dimensions = match(r"\d+x\d+", line).match
@@ -10,7 +10,7 @@ end
 
 function puzzle3(datadir::String=joinpath(@__DIR__, "data"))
     instructions = readlines(normpath(joinpath(datadir, "3.txt")))
-    claims = parse_input.(instructions)
+    claims = parse_input3.(instructions)
     squareCounts = countmap(reduce(vcat, claims))
     partOne = count(values(squareCounts) .> 1)
     partTwo = 0

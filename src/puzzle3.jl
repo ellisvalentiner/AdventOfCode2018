@@ -1,15 +1,13 @@
 
 function parse_input3(line::String)
-    offset = match(r"\d+,\d+", line).match
-    left, top = parse.(Int, split(string(offset), ','))
-    dimensions = match(r"\d+x\d+", line).match
-    width, height = parse.(Int, split(string(dimensions), 'x'))
+    id, left, top, width, height = [parse(Int, x.match) for x in collect(eachmatch(r"\d+", line))]
     squares = [(left + i, top + j) for i=1:width, j=1:height]
     return reshape(squares, (length(squares)))
 end
 
 function puzzle3(datadir::String=joinpath(@__DIR__, "data"))
-    instructions = readlines(normpath(joinpath(datadir, "3.txt")))
+    filename = normpath(joinpath(datadir, "3.txt"))
+    instructions = readlines(filename)
     claims = parse_input3.(instructions)
     squareCounts = countmap(reduce(vcat, claims))
     partOne = count(values(squareCounts) .> 1)

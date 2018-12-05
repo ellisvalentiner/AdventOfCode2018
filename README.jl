@@ -25,7 +25,7 @@ for puzzle in filter(x-> x≠ :AdventOfCode2018, names(AdventOfCode2018))
         mintime = round(minimum(result.times) / 1_000_000, digits=3)
         mediantime = round(median(result.times) / 1_000_000, digits=3)
         meantime = round(mean(result.times) / 1_000_000, digits=3)
-        maxtime = round(minimum(result.times) / 1_000_000, digits=3)
+        maxtime = round(maximum(result.times) / 1_000_000, digits=3)
         n = length(result.times)
         row = [$day memory allocations mintime mediantime meantime maxtime n]
         table = vcat(table, row)
